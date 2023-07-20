@@ -1,13 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
-export const SearchBar = () => {
-
+const SearchBar = ({ searchText, setSearchText, handleOnSearch }) => {
     return (
         <>
-            <input data-testid="search-bar" placeholder="Search" />
-            <FontAwesomeIcon data-testid="search-icon" icon={faSearch} />
+            <input data-testid="search-bar" placeholder="Search" value={searchText} onChange={(event) => setSearchText(event?.target?.value)} />
+            <FontAwesomeIcon data-testid="search-icon" icon={faSearch} onClick={handleOnSearch} />
         </>
     );
 }
 
+export default SearchBar;

@@ -21,4 +21,24 @@ describe('Search', () => {
         expect(axios).toHaveBeenCalledWith(expectedRequestParams)
         expect(actualResult).toBe(expectedResult)
     })
+
+    it('Should call youtube search api with the given text as query and nextPageToken when available', async () => {
+        const searchText = "flower";
+        const pageToken = "1234"
+        const expectedResult = { data: { items: [1, 2] } }
+        axios.mockResolvedValue(expectedResult)
+        
+        const expectedRequestParams = {
+            "method": "GET",
+            "params": {
+                "key": process.env.REACT_APP_YOUTUBE_API_KEY,
+                "maxResults": "20", "part": "snippet", "q": searchText,
+                "pageToken":pageToken
+            }, "url": "https://www.googleapis.com/youtube/v3/search"
+        }
+        const actualResult = await search(searchText,pageToken)
+
+        expect(axios).toHaveBeenCalledWith(expectedRequestParams)
+        expect(actualResult).toBe(expectedResult)
+    })
 })

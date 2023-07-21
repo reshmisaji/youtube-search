@@ -44,4 +44,16 @@ describe('SearchBar', () => {
         expect(props.setSearchText).toHaveBeenCalledWith("new value")
     });
 
+    it("Should call handleOnSearch when enter key is pressed", async () => {
+        const mockSearch = jest.fn()
+        render(<SearchBar handleOnSearch={mockSearch} />);
+        const searchBar = screen.getByTestId("search-bar");
+
+        fireEvent.keyDown(searchBar, {
+            code: "Enter"
+        });
+
+        expect(mockSearch).toHaveBeenCalled()
+    });
+
 })

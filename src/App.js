@@ -1,15 +1,31 @@
 import { useState } from 'react';
 import './App.css';
 import SearchBar from './components/SearchBar';
-import { search } from './apis/YouTube';
+import { search } from './clients/YouTube';
+import SearchResults from './components/SearchResults';
 
 function App() {
   const [searchText, setSearchText] = useState("")
   const [searchResult, setSearchResult] = useState([])
   const [error, setError] = useState()
+  const [nextPageToken, setNextPageToken] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleOnSearch = async () => {
-    search(searchText)
+    if (!isLoading) {
+      setIsLoading(true)
+      search(searchText, nextPageToken).then(({ data }) => {
+        if (data?.items && data?.nextPageToken) {
+          const { items, nextPageToken } = data;
+          setSearchResult([...searchResult, ...items])
+          setNextPageToken(nextPageToken)
+          setIsLoading(false)
+        }
+      }).catch(error => {
+        setError(error.message)
+        setIsLoading(false)
+      });
+    }
   }
 
   return (
@@ -18,6 +34,8 @@ function App() {
         Youtube Search
       </header>
       <SearchBar handleOnSearch={handleOnSearch} searchText={searchText} setSearchText={setSearchText} />
+      {searchResult?.length ? <SearchResults results={searchResult} fetchData={handleOnSearch} hasMore={Boolean(nextPageToken)} /> : null}
+      {error ?? <div>{error}</div>}
     </div>
   );
 }

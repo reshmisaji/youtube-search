@@ -16,44 +16,71 @@ describe('SearchBar', () => {
         expect(searchIcon).toHaveAttribute('data-icon', 'magnifying-glass')
     });
 
-    it('Should call handleOnSearch on click of search icon', () => {
+    it('Should not call handleOnSearch on click of search icon if searchQuery is empty', () => {
         const mockSearch = jest.fn()
         render(<SearchBar handleOnSearch={mockSearch} />);
+
         const searchButton = screen.getByTestId("search-icon");
+
         expect(searchButton).toBeInTheDocument();
-        fireEvent.click(searchButton)
-        expect(mockSearch).toHaveBeenCalled()
+
+        fireEvent.submit(searchButton)
+
+        expect(mockSearch).not.toHaveBeenCalled()
     });
 
-    it('Should render searchbar with the searchText', () => {
-        const props = { searchText: "test" }
-        render(<SearchBar {...props} />);
-        const searchBar = screen.getByTestId("search-bar");
-        expect(searchBar).toHaveProperty('value', 'test')
-    });
+    it('Should call handleOnSearch on click of search icon if searchQuery has value', () => {
+        const mockSearch = jest.fn()
+        render(<SearchBar handleOnSearch={mockSearch} />);
 
-    it("Should call setSearchText with target value on change of input value", async () => {
-        const props = { searchText: "test", setSearchText: jest.fn() }
-        render(<SearchBar {...props} />);
+        const searchButton = screen.getByTestId("search-icon");
         const searchBar = screen.getByTestId("search-bar");
 
-        expect(searchBar).toHaveProperty('value', 'test')
         fireEvent.change(searchBar, {
-            target: { value: "new value" }
+            target: { value: "test" }
         });
-        expect(props.setSearchText).toHaveBeenCalledWith("new value")
+        fireEvent.submit(searchButton)
+
+        expect(mockSearch).toHaveBeenCalledWith("test")
+    });
+
+    it('Should render searchbar', () => {
+        render(<SearchBar />);
+        const searchBar = screen.getByTestId("search-bar");
+        expect(searchBar).toBeInTheDocument()
     });
 
     it("Should call handleOnSearch when enter key is pressed", async () => {
         const mockSearch = jest.fn()
         render(<SearchBar handleOnSearch={mockSearch} />);
+
+        const searchForm = screen.getByTestId("search-form");
         const searchBar = screen.getByTestId("search-bar");
 
-        fireEvent.keyDown(searchBar, {
-            code: "Enter"
+        fireEvent.change(searchBar, {
+            target: { value: "test" }
         });
+        fireEvent.submit(searchForm);
 
         expect(mockSearch).toHaveBeenCalled()
+    });
+
+    it("Should clear the text when clear icon is clicked", async () => {
+        const mockSearch = jest.fn()
+        render(<SearchBar handleOnSearch={mockSearch} />);
+
+        const searchBar = screen.getByTestId("search-bar");
+
+        fireEvent.change(searchBar, {
+            target: { value: "test" }
+        });
+
+        expect(searchBar.value).toBe("test")
+
+        fireEvent.click(screen.getByTestId("close-icon"))
+        
+        expect(searchBar.value).toBe("")
+
     });
 
 })

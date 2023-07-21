@@ -1,16 +1,30 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faXmark, } from '@fortawesome/free-solid-svg-icons'
+import './SearchBar.css';
+import { useState } from 'react';
 
-const SearchBar = ({ searchText, setSearchText, handleOnSearch }) => {
-    const onKeyDown = (event) => {
-        if (event?.code === "Enter") handleOnSearch()
+const SearchBar = ({ handleOnSearch }) => {
+    const [searchQuery, setSearchQuery] = useState("")
+
+    const clearSearch = () => {
+        setSearchQuery("")
+    }
+    const submit = (event) => {
+        event.preventDefault()
+        if (searchQuery.length)
+            handleOnSearch(searchQuery)
     }
 
     return (
-        <>
-            <input data-testid="search-bar" placeholder="Search" value={searchText} onChange={(event) => setSearchText(event?.target?.value)} onKeyDown={onKeyDown} />
-            <FontAwesomeIcon data-testid="search-icon" icon={faSearch} onClick={handleOnSearch} />
-        </>
+        <form onSubmit={submit} className="search-form" data-testid="search-form">
+            <input data-testid="search-bar" className='search-input' placeholder="Search" onChange={(event)=>setSearchQuery(event?.target?.value)} value={searchQuery}/>
+            {searchQuery.length ? <button type='submit' className='close-button'>
+                <FontAwesomeIcon data-testid="close-icon" icon={faXmark} className='close-icon' onClick={clearSearch} />
+            </button> : null}
+            <button type='submit' className='search-icon'>
+                <FontAwesomeIcon data-testid="search-icon" icon={faSearch} className="magnifying-glass" />
+            </button>
+        </form>
     );
 }
 

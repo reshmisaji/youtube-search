@@ -11,30 +11,41 @@ function App() {
   const [nextPageToken, setNextPageToken] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleOnSearch = async () => {
-    if (!isLoading) {
-      setIsLoading(true)
-      search(searchText, nextPageToken).then(({ data }) => {
-        if (data?.items && data?.nextPageToken) {
-          const { items, nextPageToken } = data;
-          setSearchResult([...searchResult, ...items])
-          setNextPageToken(nextPageToken)
-          setIsLoading(false)
-        }
-      }).catch(error => {
-        setError(error.message)
+  const fetchResults = async (searchQuery = '', newSearch = false) => {
+    setIsLoading(true)
+
+    search(searchQuery || searchText, nextPageToken).then(({ data }) => {
+      if (data?.items && data?.nextPageToken) {
+        const { items, nextPageToken } = data;
+        setNextPageToken(nextPageToken)
         setIsLoading(false)
-      });
+        if (newSearch) {
+          setSearchResult(items)
+          return;
+        }
+        setSearchResult([...searchResult, ...items])
+      }
+    }).catch(error => {
+      setError(error.message)
+      setIsLoading(false)
+    });
+  }
+
+  const handleOnSearch = async (searchQuery) => {
+    setSearchText(searchQuery)
+    if (!isLoading && searchQuery.length) {
+      const newSearch = true;
+      fetchResults(searchQuery, newSearch)
     }
   }
 
   return (
     <div className="app">
       <header data-testid="app-header" className="app-header">
-        Youtube Search
+        <div className='heading-text'>Youtube Search</div>
+        <SearchBar handleOnSearch={handleOnSearch} />
       </header>
-      <SearchBar handleOnSearch={handleOnSearch} searchText={searchText} setSearchText={setSearchText} />
-      {searchResult?.length ? <SearchResults results={searchResult} fetchData={handleOnSearch} hasMore={Boolean(nextPageToken)} /> : null}
+      {searchResult?.length ? <SearchResults results={searchResult} fetchData={fetchResults} hasMore={Boolean(nextPageToken)} /> : null}
       {error ?? <div>{error}</div>}
     </div>
   );

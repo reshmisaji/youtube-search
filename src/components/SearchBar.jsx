@@ -16,7 +16,7 @@ const SearchBar = ({ handleOnSearch }) => {
     }
 
     return (
-        <form onSubmit={submit} className="search-form" data-testid="search-form">
+        <form id="search-form" onSubmit={submit} className="search-form" data-testid="search-form">
             <input data-testid="search-bar" className='search-input' placeholder="Search" onChange={(event)=>setSearchQuery(event?.target?.value)} value={searchQuery}/>
             {searchQuery.length ? <button type='submit' className='close-button'>
                 <FontAwesomeIcon data-testid="close-icon" icon={faXmark} className='close-icon' onClick={clearSearch} />

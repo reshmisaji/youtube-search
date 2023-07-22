@@ -16,6 +16,7 @@ exports[`App Snapshot should render the initial state 1`] = `
     <form
       className="search-form"
       data-testid="search-form"
+      id="search-form"
       onSubmit={[Function]}
     >
       <input

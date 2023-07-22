@@ -56,39 +56,46 @@ exports[`SearchResults Should render search resuls with props 2`] = `
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
           allowFullScreen={true}
           className="thumbnail"
+          data-testid="youtube-video-0"
           src="https://www.youtube.com/embed/Y9faB5tXij0"
+          title="Johnny Stimson - Flower (Piano Version)_0"
         />
         <div
           className="details"
         >
           <div
             className="title"
+            data-testid="video-title-0"
           >
             Johnny Stimson - Flower (Piano Version)
           </div>
           <div
-            className="channel-logo"
-          />
-          <div
-            className="channel-name"
+            className="publish-date"
+            data-testid="publish-date-0"
           >
-            Johnny Stimson
+            Fri Nov 19 2021
           </div>
           <div
-            className="views"
-          />
+            className="channel"
+          >
+            <div
+              className="channel-logo"
+            >
+              J
+            </div>
+            <div
+              className="channel-name"
+              data-testid="channel-title-0"
+            >
+              Johnny Stimson
+            </div>
+          </div>
           <div
-            className="likes"
-          />
-          <button
-            className="play-video"
-          />
-          <button
-            className="like"
-          />
-          <button
-            className="dislike"
-          />
+            className="description"
+            data-testid="video-description-0"
+          >
+            Follow Johnny on Instagram: http://bit.ly/2iqacB1
+          </div>
         </div>
       </div>
     </div>

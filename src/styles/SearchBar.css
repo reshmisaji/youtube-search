@@ -51,7 +51,7 @@
     height: 20px;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
     .search-form {
         background: black;
         padding-right: 2vw;

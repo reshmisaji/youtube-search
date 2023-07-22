@@ -78,11 +78,16 @@ exports[`SearchResults Should render search resuls with props 2`] = `
           <div
             className="channel"
           >
-            <div
-              className="channel-logo"
+            <a
+              href="https://www.youtube.com/channel/UCH5d2bpWBVu6eQk1amUSpyA"
+              target="blank"
             >
-              J
-            </div>
+              <div
+                className="channel-logo"
+              >
+                J
+              </div>
+            </a>
             <div
               className="channel-name"
               data-testid="channel-title-0"

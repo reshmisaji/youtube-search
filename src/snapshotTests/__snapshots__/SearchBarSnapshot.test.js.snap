@@ -4,6 +4,7 @@ exports[`SearchBar Should render search bar with props 1`] = `
 <form
   className="search-form"
   data-testid="search-form"
+  id="search-form"
   onSubmit={[Function]}
 >
   <input

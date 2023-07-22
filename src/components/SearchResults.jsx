@@ -20,7 +20,8 @@ const VideoCard = (data, index) => {
         {new Date(snippet?.publishedAt).toDateString()}</div>
 
       <div className="channel">
-        <div className="channel-logo">{snippet?.channelTitle?.slice(0, 1)}</div>
+        <a href={`https://www.youtube.com/channel/${snippet?.channelId}`} target="blank" >
+          <div className="channel-logo">{snippet?.channelTitle?.slice(0, 1)}</div></a>
         <div className="channel-name" data-testid={`channel-title-${index}`}>{snippet?.channelTitle}</div>
       </div>
       <div className="description" data-testid={`video-description-${index}`}>{snippet?.description}</div>

@@ -13,7 +13,7 @@ function App() {
   const fetchResults = async (newSearch = false) => {
     setIsLoading(true)
 
-    search(searchText, (!newSearch ?? searchResult?.nextPageToken))
+    search(searchText, (!newSearch && searchResult?.nextPageToken))
       .then(({ data = {} }) => {
         const { items, nextPageToken } = data;
         setSearchResult({ items: [...(newSearch ? [] : searchResult.items), ...items], nextPageToken })
@@ -37,8 +37,8 @@ function App() {
         <SearchBar handleOnSearch={setSearchText} />
       </header>
       {searchResult?.items?.length ? <SearchResults results={searchResult?.items} fetchData={fetchResults} hasMore={Boolean(searchResult?.nextPageToken)} /> : null}
-      {error ?? <div>{error}</div>}
-      {isLoading ?? <div data-testid="loading">Loading...</div>}
+      {error ? <div>{error}</div> : null}
+      {isLoading ? <div data-testid="loading">Loading...</div> : null}
     </div>
   );
 }

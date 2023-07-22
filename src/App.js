@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import SearchBar from './components/SearchBar';
 import { search } from './clients/YouTube';
@@ -11,42 +11,35 @@ function App() {
   const [nextPageToken, setNextPageToken] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
-  const fetchResults = async (searchQuery = '', newSearch = false) => {
+  const fetchResults = async (newSearch = false) => {
     setIsLoading(true)
 
-    search(searchQuery || searchText, nextPageToken).then(({ data }) => {
-      if (data?.items && data?.nextPageToken) {
+    search(searchText, (!newSearch ?? nextPageToken))
+      .then(({ data = {} }) => {
         const { items, nextPageToken } = data;
         setNextPageToken(nextPageToken)
+        setSearchResult([...(newSearch ? [] : searchResult), ...items])
+      }).catch(error => {
+        setError(error.message)
+      }).finally(() => {
         setIsLoading(false)
-        if (newSearch) {
-          setSearchResult(items)
-          return;
-        }
-        setSearchResult([...searchResult, ...items])
-      }
-    }).catch(error => {
-      setError(error.message)
-      setIsLoading(false)
-    });
+      });
   }
 
-  const handleOnSearch = async (searchQuery) => {
-    setSearchText(searchQuery)
-    if (!isLoading && searchQuery.length) {
-      const newSearch = true;
-      fetchResults(searchQuery, newSearch)
-    }
-  }
+  useEffect(() => {
+    if (searchText)
+      fetchResults(true)
+  }, [searchText])
 
   return (
     <div className="app">
       <header data-testid="app-header" className="app-header">
         <div className='heading-text'>Youtube Search</div>
-        <SearchBar handleOnSearch={handleOnSearch} />
+        <SearchBar handleOnSearch={setSearchText} />
       </header>
-      {searchResult?.length ? <SearchResults results={searchResult} fetchData={fetchResults} hasMore={Boolean(nextPageToken)} /> : null}
+      {searchResult?.length? <SearchResults results={searchResult} fetchData={fetchResults} hasMore={Boolean(nextPageToken)} /> : null}
       {error ?? <div>{error}</div>}
+      {isLoading ?? <div data-testid="loading">Loading...</div>}
     </div>
   );
 }

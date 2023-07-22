@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchResults Should render search resuls with props 1`] = `
+<div
+  className="results-container"
+  data-testid="search-results"
+  id="search-results"
+>
+  <div
+    className="infinite-scroll-component__outerdiv"
+    style={Object {}}
+  >
+    <div
+      className="infinite-scroll-component results"
+      style={
+        Object {
+          "WebkitOverflowScrolling": "touch",
+          "height": "auto",
+          "overflow": "auto",
+        }
+      }
+    >
+      <h4>
+        Loading...
+      </h4>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`SearchResults Should render search resuls with props 2`] = `
+<div
+  className="results-container"
+  data-testid="search-results"
+  id="search-results"
+>
+  <div
+    className="infinite-scroll-component__outerdiv"
+    style={Object {}}
+  >
+    <div
+      className="infinite-scroll-component results"
+      style={
+        Object {
+          "WebkitOverflowScrolling": "touch",
+          "height": "auto",
+          "overflow": "auto",
+        }
+      }
+    >
+      <div
+        className="video-card-container"
+        data-testid="video-card-0"
+      >
+        <iframe
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+          allowFullScreen={true}
+          className="thumbnail"
+          src="https://www.youtube.com/embed/Y9faB5tXij0"
+        />
+        <div
+          className="details"
+        >
+          <div
+            className="title"
+          >
+            Johnny Stimson - Flower (Piano Version)
+          </div>
+          <div
+            className="channel-logo"
+          />
+          <div
+            className="channel-name"
+          >
+            Johnny Stimson
+          </div>
+          <div
+            className="views"
+          />
+          <div
+            className="likes"
+          />
+          <button
+            className="play-video"
+          />
+          <button
+            className="like"
+          />
+          <button
+            className="dislike"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

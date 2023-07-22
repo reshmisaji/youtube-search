@@ -19,7 +19,7 @@ jest.mock("./components/SearchBar", () => (props) => {
 jest.mock("./components/SearchResults", () => (props) => {
     mockSearchResultsComponent(props)
     const { results, fetchData } = props
-    return (<div data-testid="search-results" id="search-results" onScroll={()=>fetchData()}>
+    return (<div data-testid="search-results" id="search-results" onScroll={() => fetchData()}>
         {results && results.map((result, index) => (<div key={index}>{result?.snippet?.title}</div>))}
     </div>);
 });
@@ -81,6 +81,19 @@ describe('App', () => {
             const searchResult = screen.getByTestId("search-results");
 
             expect(searchResult).toBeInTheDocument();
+        });
+    });
+
+    it('Should not render search results container when data is empty', async () => {
+        render(<App />);
+        search.mockResolvedValue({})
+
+        await waitFor(() => {
+            fireEvent.click(screen.getByTestId("search-bar"))
+            fireEvent.click(screen.getByTestId("search-icon"))
+            const searchResult = screen.queryByTestId("search-results");
+
+            expect(searchResult).not.toBeInTheDocument();
         });
     });
 

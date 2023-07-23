@@ -20,9 +20,14 @@ exports[`SearchResults Should render search resuls with props 1`] = `
         }
       }
     >
-      <h4>
-        Loading...
-      </h4>
+      <div
+        className="loader-container"
+      >
+        <div
+          className="loading"
+          data-testid="loading"
+        />
+      </div>
     </div>
   </div>
 </div>

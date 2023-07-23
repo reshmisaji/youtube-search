@@ -1,5 +1,6 @@
 import InfiniteScroll from "react-infinite-scroll-component"
 import '../styles/SearchResults.css'
+import { CHANNEL_URL, EMBED_URL } from "../constants";
 
 const VideoCard = (data, index) => {
   const { snippet, id } = data;
@@ -8,7 +9,7 @@ const VideoCard = (data, index) => {
 
     <iframe
       title={`${snippet?.title}_${index}`}
-      src={`https://www.youtube.com/embed/${id.videoId}`}
+      src={`${EMBED_URL}/${id.videoId}`}
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
       allowFullScreen
       className="thumbnail"
@@ -20,7 +21,7 @@ const VideoCard = (data, index) => {
         {new Date(snippet?.publishedAt).toDateString()}</div>
 
       <div className="channel">
-        <a href={`https://www.youtube.com/channel/${snippet?.channelId}`} target="blank" >
+        <a href={`${CHANNEL_URL}/${snippet?.channelId}`} target="blank" >
           <div className="channel-logo">{snippet?.channelTitle?.slice(0, 1)}</div></a>
         <div className="channel-name" data-testid={`channel-title-${index}`}>{snippet?.channelTitle}</div>
       </div>

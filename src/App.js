@@ -3,6 +3,7 @@ import './App.css';
 import SearchBar from './components/SearchBar';
 import { search } from './clients/YouTube';
 import SearchResults from './components/SearchResults';
+import { APP_NAME } from './constants';
 
 function App() {
   const [searchText, setSearchText] = useState("")
@@ -33,7 +34,7 @@ function App() {
   return (
     <div className="app">
       <header data-testid="app-header" className="app-header">
-        <div className='heading-text'>Youtube Search</div>
+        <div className='heading-text'>{APP_NAME}</div>
         <SearchBar handleOnSearch={setSearchText} />
       </header>
       {searchResult?.items?.length ? <SearchResults results={searchResult?.items} fetchData={fetchResults} hasMore={Boolean(searchResult?.nextPageToken)} /> : null}

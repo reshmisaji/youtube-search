@@ -1,9 +1,10 @@
 import axios from "axios"
+import { SEARCH_URL } from "../constants"
 
 export const search = (searchValue, nextPageToken) => {
     const request = {
         "method": "GET",
-        "url": 'https://www.googleapis.com/youtube/v3/search',
+        "url": SEARCH_URL,
         "params": {
             'part': 'snippet',
             'maxResults': '20',

@@ -38,7 +38,9 @@ function App() {
       </header>
       {searchResult?.items?.length ? <SearchResults results={searchResult?.items} fetchData={fetchResults} hasMore={Boolean(searchResult?.nextPageToken)} /> : null}
       {error ? <div>{error}</div> : null}
-      {isLoading ? <div data-testid="loading">Loading...</div> : null}
+      {!searchResult?.items?.length && isLoading ? <div className='loading-container'>
+        <div data-testid="loading" className="loading"></div>
+      </div> : null}
     </div>
   );
 }

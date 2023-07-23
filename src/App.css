@@ -16,6 +16,37 @@
   font-size: 18px;
 }
 
+.loading-container,
+.loader-container {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.loading-container{
+  align-items: center;
+  height: 100vh;
+}
+
+.loading {
+  border: 8px solid #827e7e;
+  border-radius: 50%;
+  border-top: 8px solid #1b1b1b;
+  width: 35px;
+  height: 35px;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 @media screen and (max-width: 600px) {
   .app-header {
     flex-direction: column;

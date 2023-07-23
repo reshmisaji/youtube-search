@@ -37,7 +37,9 @@ const SearchResults = ({ results, fetchData, hasMore }) => {
       dataLength={results.length}
       next={fetchData}
       hasMore={hasMore}
-      loader={<h4>Loading...</h4>}
+      loader={<div className='loader-container'>
+        <div data-testid="loading" className="loading"></div>
+      </div>}
       endMessage={
         <p style={{ textAlign: 'center' }}>
           <b>Yay! You have seen it all</b>

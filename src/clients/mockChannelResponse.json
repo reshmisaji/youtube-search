@@ -1,0 +1,43 @@
+{
+    "kind": "youtube#channelListResponse",
+    "etag": "LCTeeT1huRkAdpxDdnVick07fKM",
+    "pageInfo": {
+      "totalResults": 1,
+      "resultsPerPage": 5
+    },
+    "items": [
+      {
+        "kind": "youtube#channel",
+        "etag": "Z5ebw6IyG6hJlHqiBEnOBh1_ll0",
+        "id": "UCritGVo7pLJLUS8wEu32vow",
+        "snippet": {
+          "title": "(G)I-DLE (여자)아이들 (Official YouTube Channel)",
+          "description": "(G)I-DLE Official YouTube Channel.\n(여자)아이들 공식 유튜브 채널입니다.\n\n미연, 민니, 소연, 우기, 슈화\nMIYEON, MINNIE, SOYEON, YUQI, SHUHUA\n\n",
+          "customUrl": "@official_g_i_dle",
+          "publishedAt": "2018-04-19T03:18:44Z",
+          "thumbnails": {
+            "default": {
+              "url": "https://yt3.ggpht.com/ytc/AOPolaTLectX2f5pW2moIAOaG4c13Tqe3fNivYTtV-CwgQ=s88-c-k-c0x00ffffff-no-rj-mo",
+              "width": 88,
+              "height": 88
+            },
+            "medium": {
+              "url": "https://yt3.ggpht.com/ytc/AOPolaTLectX2f5pW2moIAOaG4c13Tqe3fNivYTtV-CwgQ=s240-c-k-c0x00ffffff-no-rj-mo",
+              "width": 240,
+              "height": 240
+            },
+            "high": {
+              "url": "https://yt3.ggpht.com/ytc/AOPolaTLectX2f5pW2moIAOaG4c13Tqe3fNivYTtV-CwgQ=s800-c-k-c0x00ffffff-no-rj-mo",
+              "width": 800,
+              "height": 800
+            }
+          },
+          "localized": {
+            "title": "(G)I-DLE (여자)아이들 (Official YouTube Channel)",
+            "description": "(G)I-DLE Official YouTube Channel.\n(여자)아이들 공식 유튜브 채널입니다.\n\n미연, 민니, 소연, 우기, 슈화\nMIYEON, MINNIE, SOYEON, YUQI, SHUHUA\n\n"
+          },
+          "country": "KR"
+        }
+      }
+    ]
+  }
